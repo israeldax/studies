@@ -1,6 +1,6 @@
-FROM alpine:latest
+FROM debian:buster-slim
 
-RUN apk update
-RUN apk add bash
+RUN apt-get update
+RUN apt-get install -y nginx
 
-CMD bash
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
