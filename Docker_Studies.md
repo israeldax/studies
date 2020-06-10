@@ -33,7 +33,7 @@
     - \<ctrl + p> + \<ctrl + q> (Leave it running in the background. Can only be ran with the -it option)
   - -d \<container> (Run in detach mode)
   - -p \<your port>:\<container port> (Set port)
-  - -v \<your path>:\<container path> (Set a volume)
+  - -v \<your path>:\<container path>
   - --name \<name> (to name a container)
   - --network \<network name> (Set a network for the container)
   - --rm \<container> (run container and remove it)
@@ -47,6 +47,34 @@
 - docker container exec \<container> \<command>
   > To execute a command in the container
 - docker container logs [-f] \<container>
+
+## Volumes
+
+Volumes are diffente from _bind mount_ since they are totally managed by Docker, and not rely on the filesystem structure of our Docker host. Volumes can be set by not providing a local path to the docker command. If we do, it'll be a _bind mount_.
+
+Bind mount:
+
+- docker container run -it -v /data:/data[:ro] alpine:latest
+  > ro option to set a read-only mount
+
+Named volume:
+
+- docker container run -it -v my-volume:/data alpine:latest
+  - --volumes-from \<container> (to use a volumes from another container)
+
+Anonymous volumes:
+
+- docker container run -it -v /data alpine:lates
+- docker container run -it --mount dst=/data alpine:latest
+- docker container run -it --mount destination=/data alpine:latest
+- docker container run -it --volume /data alpine:latest
+
+#### Important Commands
+
+- docker volume ls
+- docker volume inspect \<volume>
+- docker volume rm \<volume>
+- docker volume prune
 
 ## Network
 
@@ -80,6 +108,7 @@ An image is created based on a dockerfile.
 - CMD \<command> (A command that will run when the container starts)
   > Better use _(json)_ exec format ["bin", "opt", "opt"] otherwise the default
   > shell format will not forward interupt to the container.
+- VOLUME \<volume path>
 
 ## General
 
