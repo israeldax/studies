@@ -108,6 +108,15 @@ An image is created based on a dockerfile.
 - CMD \<command> (A command that will run when the container starts)
   > Better use _(json)_ exec format ["bin", "opt", "opt"] otherwise the default
   > shell format will not forward interupt to the container.
+- COPY \<local path> \<container path> (Copy files to the image)
+    - COPY ./html/ /var/www/html/
+    - COPY ./html/*.html /var/www/html/
+  > It is possible to use with wildcard (according to golang filepath.Match rules)
+
+  > It is possible to use path relative to docker image build
+- ADD (Same as COPY command, but it can automaticaly download remote files or facilitate work with archives)
+    - ADD ./html.tar.gz /var/www/
+    - ADD http://example.com/index.html /var/www/example.html
 - VOLUME \<volume path>
 
 ## General
