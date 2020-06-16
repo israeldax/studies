@@ -117,7 +117,8 @@ An image is created based on a dockerfile.
 - ADD (Same as COPY command, but it can automaticaly download remote files or facilitate work with archives)
     - ADD ./html.tar.gz /var/www/
     - ADD http://example.com/index.html /var/www/example.html
-- VOLUME \<volume path>
+- EXPOSE \<PORT>
+- VOLUME \<name or local path> \<path to mount>
 
 ## General
 
